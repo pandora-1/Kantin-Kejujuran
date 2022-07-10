@@ -31,6 +31,7 @@ func main() {
 
 	routes.ItemRoute(router)
 	routes.BalanceRoute(router)
+    routes.UserRoute(router)
 
 	router.Run("localhost:8000")
 }

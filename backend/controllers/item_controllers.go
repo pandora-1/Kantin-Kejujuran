@@ -145,7 +145,7 @@ func GetAllItemsSortedByNameAscending() gin.HandlerFunc {
 			items = append(items, item)
 		}
 
-		sort.Slice(items, func(i, j int) bool {
+		sort.SliceStable(items, func(i, j int) bool {
 			return items[i].Name < items[j].Name
 		})
 
@@ -179,7 +179,7 @@ func GetAllItemsSortedByNameDescending() gin.HandlerFunc {
 			items = append(items, item)
 		}
 
-		sort.Slice(items, func(i, j int) bool {
+		sort.SliceStable(items, func(i, j int) bool {
 			return items[i].Name > items[j].Name
 		})
 
@@ -202,7 +202,6 @@ func GetAllItemsSortedByDateAscending() gin.HandlerFunc {
 			return
 		}
 
-		//reading from the db in an optimal way
 		defer results.Close(ctx)
 		for results.Next(ctx) {
 			var item models.Item

@@ -1,7 +1,6 @@
-import axios from "axios"
 import React from 'react'
 import config from "../../config"
-import Router , {useRouter}  from 'next/router';
+import {useRouter}  from 'next/router';
 
 
 const AddItemComponent = () => {

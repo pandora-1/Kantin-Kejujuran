@@ -2,9 +2,14 @@ import config from "../../config"
 import axios from "axios"
 import React from 'react'
 import Image from 'next/image'
+import { useEffect } from "react";
 
 const CardComponent = () => {
-
+    let [isLogin, setIsLogin] = React.useState(null) // state hook
+    useEffect(() => {
+      const login = typeof window !== 'undefined' ? (localStorage.getItem('token') == null ? false : true) : null
+      setIsLogin(login)
+    }, [])
     let [dataItems, setDataItems] = React.useState([])
     let [typeSorting, setTypeSorting] = React.useState('')
     let [ascendingSorting, setAscendingSorting] = React.useState('')
@@ -12,6 +17,7 @@ const CardComponent = () => {
         axios.get(`${config.urlBackend}/items`)
           .then(res => {
             setDataItems(res.data.data.data);
+            console.log(res)
           }).catch(error => console.log(error));
     }, [])
 
@@ -29,11 +35,12 @@ const CardComponent = () => {
         } else if (ascendingSorting != 1 && ascendingSorting != 2) {
             alert("Please choose ascending or descending")
         } else {
-            const query_type = (typeSorting == 1 ? "sorted-by-name" : "sorted-by-date")
+            const query_type = (typeSorting == 2 ? "sorted-by-name" : "sorted-by-date")
             const query_asc = (ascendingSorting == 1 ? "ascending" : "descending")
             axios.get(`${config.urlBackend}/items/${query_type}/${query_asc}`)
               .then(res => {
                 setDataItems(res.data.data.data);
+                console.log("sukses")
               }).catch(error => console.log(error));
         }
     }
@@ -50,7 +57,7 @@ const CardComponent = () => {
                             <h6 style={{color: "whitesmoke"}}>Released date: {d.created_at.slice(0,10)}</h6>
                             <p class="card-text" style={{color: "whitesmoke"}}>{d.description}</p>
                             <div className="row">
-                                <button onClick={() => handleClickDelete(d.id)} class="col-6 btn btn-primary">Buy</button>
+                                <button disabled={!isLogin} onClick={() => handleClickDelete(d.id)} class="col-6 btn btn-primary">Buy</button>
                             </div>
                         </div>
                     </div>
