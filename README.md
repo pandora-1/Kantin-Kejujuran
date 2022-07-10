@@ -41,3 +41,6 @@ go run main.go
 ```bash
 npm run dev
 ```
+## Bantuan
+Jika terdapat kesulitan dalam menjalankan, anda dapat menghubungi saya dengan kontak berikut ini
+Line : michael_herman
