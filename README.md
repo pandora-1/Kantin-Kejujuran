@@ -11,6 +11,11 @@ Masuk ke folder /frontend
 ```bash
 npm install
 ```
+Masuk ke folder /backend
+
+```bash
+go get -u -v -f all
+```
 
 ## Mempersiapkan environment
 1. Membuat file .env di dalam folder /backend
